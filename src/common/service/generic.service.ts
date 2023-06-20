@@ -26,10 +26,21 @@ export class GenericService<
     }      
   }
     
-  async find(filter?: FilterQuery<T>,  projection?: ProjectionType<T>, query?: QueryOptions<T>): Promise<T[] | String> {   
+  async find(filter?: FilterQuery<T>,  projection?: ProjectionType<T>, query?: QueryOptions<T>): Promise<any> {   
     try{
       const filterDeleted = { ...filter, deletedAt: null};
-      return await this.repository.find(filterDeleted, projection, query);
+      const rows = await this.find(filterDeleted, projection, query);
+      const count = await this.repository.count(filterDeleted); 
+      const totalPage = Math.ceil(count/query.limit)
+      return {
+        rows: rows,
+        XTotal:	count,
+        XTotalPages: totalPage,
+        XPerPage:	query.limit,
+        XPage: query.skip,
+        XNextPage: query.skip === totalPage - 1? query.skip : query.skip + 1,
+        XPrevPage: query.skip === 0? 1 : query.skip - 1,
+      }
     }catch(err){
       return err.message;
     }
