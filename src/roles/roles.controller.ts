@@ -1,10 +1,9 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { RolesService } from './roles.service';
 import { RoleDto } from './dto/create-role.dto';
 import { UpdateRoleDto } from './dto/update-role.dto';
 import { ObjectIdValidationPipe } from 'src/utils/validationPipe/objectId.validationPipe';
 import { ObjectId } from 'mongoose';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('roles')
 // @UseGuards(JwtAuthGuard)
@@ -15,8 +14,7 @@ export class RolesController {
   async create(@Body() userDto: RoleDto) {
     return this.rolesService.create(userDto);
   }
-  // {email: "string@asdsd.com",
-  // firstName: "111"}, "firstName lastName", {populate:'role', limit: 2, skip: 4}
+  
   @Get()
   find(){//: Promise<Role[]> {
     return this.rolesService.find();

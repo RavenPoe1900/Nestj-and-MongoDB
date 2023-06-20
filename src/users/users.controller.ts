@@ -1,21 +1,9 @@
-import { Controller, Get, Post, Body, Param, Delete, Patch, UseInterceptors, UploadedFile, Req, Res, StreamableFile, HttpStatus, Header, Headers, UseGuards } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
-import { Response } from 'express';
-import { createReadStream, statSync } from 'fs';
+import { Controller, Get, Post, Body, Param, Delete, Patch} from '@nestjs/common';
 import { ObjectId } from 'mongoose';
-import { join } from 'path';
-import { UploadConfig } from 'src/utils/dto/uploadConfig';
-import { multerConfig } from 'src/utils/functions';
-import { ImageValidationPipe } from 'src/utils/validationPipe/isImage.validationPipe';
-import { PdfValidationPipe } from 'src/utils/validationPipe/isPdf.validationPipe';
-import { PowerPointValidationPipe } from 'src/utils/validationPipe/isPowerPoint.validationPipe';
-import { VideoValidationPipe } from 'src/utils/validationPipe/isVideo.validationPipe';
 import { ObjectIdValidationPipe } from 'src/utils/validationPipe/objectId.validationPipe';
 import { UserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { UsersService } from './users.service';
-import { uploadConfig } from 'config/config';
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 
 @Controller('users')
 // @UseGuards(JwtAuthGuard)
