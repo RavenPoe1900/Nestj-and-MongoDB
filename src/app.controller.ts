@@ -1,12 +1,11 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
 
-@Controller()
+@Controller('v1/ping')
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
-  @Get()
-  show() {
-    return this.appService.show();
-  }
+    @Get()
+    checkHealth() {
+        return {
+            "status":  process.env.ENV
+        }
+    }
 }

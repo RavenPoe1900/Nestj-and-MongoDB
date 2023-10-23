@@ -1,0 +1,1 @@
+export const projection: string = "-deletedAt -removedId -createdAt -updatedAt -__v";

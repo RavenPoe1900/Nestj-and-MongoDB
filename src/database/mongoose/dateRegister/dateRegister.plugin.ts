@@ -1,6 +1,6 @@
-import { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-export const dateRegisterPlugin = (schema: Schema) => {
+export const dateRegisterPlugin = (schema: mongoose.Schema) => {
   schema.add({
     createdAt:{
       type: Date,
